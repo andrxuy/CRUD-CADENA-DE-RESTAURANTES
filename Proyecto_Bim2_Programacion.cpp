@@ -1,7 +1,7 @@
 /* PROYECTO SEGUNDO BIMESTRE "MENUS EN CADENA DE RESTAURANTES"
-Andrés Oto
-Matías Borja
-David Pilatuña*/
+AndrÃ©s Oto
+MatÃ­as Borja
+David PilatuÃ±a*/
 
 #include<iostream>
 #include<vector>
@@ -20,10 +20,16 @@ struct Menu{
 	
 	void mostrar(){
 		cout << "\nID: " << id << "\n" << "Nombre: " << nombre << "\n"
-	    << "Descripción: " << descripcion << "\n"
-	    << "Categoría: " << categoria << "\n"
+	    << "DescripciÃ³n: " << descripcion << "\n"
+	    << "CategorÃ­a: " << categoria << "\n"
 	    << "Precio: $" << precio << "\n";
 	}	
 };
 
 
+int main(){
+	setlocale(LC_ALL, "");
+	vector<Menu>menus; 
+
+	return 0;
+}
