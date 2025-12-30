@@ -26,6 +26,28 @@ struct Menu{
 	}	
 };
 
+void recorrer(vector<Menu>& menus){
+	for(Menu m:menus){
+		m.mostrar();
+	}
+}
+
+void agregar(vector<Menu>& menus){
+	Menu m;
+	cout<<"\nIngrese el ID del menú: ";
+	cin>>m.id;
+	cin.ignore();
+	cout<<"Ingrese el nombre del menú: ";
+	getline(cin, m.nombre);
+	cout<<"Ingrese la descripcion del menú: ";
+	getline(cin, m.descripcion);
+	cout<<"Ingrese la categoria del menú: ";
+	getline(cin, m.categoria);
+	cout<<"Ingrese el precio del menú: ";
+	cin>>m.precio;
+	cout<<endl;
+	menus.push_back(m);
+}
 
 int main(){
 	setlocale(LC_ALL, "");
@@ -33,3 +55,4 @@ int main(){
 
 	return 0;
 }
+
