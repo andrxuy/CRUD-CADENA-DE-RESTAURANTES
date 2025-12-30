@@ -51,8 +51,17 @@ void agregar(vector<Menu>& menus){
 
 int main(){
 	setlocale(LC_ALL, "");
+	
+	int op=-1;
 	vector<Menu>menus; 
+	cout << "\n*=*=*=*=*=*=*=*=*=*APP REGISTRO MENÚS*=*=*=*=*=*=*=*=*=*"<<endl;
+	cout << "\n1. Mostrar Menús"<<endl;
+	cout << "2. Insertar nuevo Menú"<<endl;;
+	cout << "0. Salir del sistema"<<endl;;
+	cout << "Digite opcion: ";
+	cin >> op;	
 
+	
 	return 0;
 }
 
