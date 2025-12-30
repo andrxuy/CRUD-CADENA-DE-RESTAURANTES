@@ -54,12 +54,30 @@ int main(){
 	
 	int op=-1;
 	vector<Menu>menus; 
+	
+	while(op!=-0){
 	cout << "\n*=*=*=*=*=*=*=*=*=*APP REGISTRO MENÚS*=*=*=*=*=*=*=*=*=*"<<endl;
 	cout << "\n1. Mostrar Menús"<<endl;
 	cout << "2. Insertar nuevo Menú"<<endl;;
 	cout << "0. Salir del sistema"<<endl;;
 	cout << "Digite opcion: ";
 	cin >> op;	
+	
+	switch(op){
+		case 1:
+			recorrer(menus);
+			break;
+		case 2:
+			agregar(menus);
+			break;
+		case 0:
+			cout<<"\nSALIENDO DEL SISTEMA...."<<endl;
+			break;
+		default:
+			cout<<"\nOPCIÓN INCORRECTA"<<endl;		
+	}
+	}
+	
 
 	
 	return 0;
