@@ -49,6 +49,42 @@ void agregar(vector<Menu>& menus){
 	menus.push_back(m);
 }
 
+void actualizar(vector<Menu>& menus){
+	int idBuscar;
+	bool encontrado = false;
+
+	cout << "\nIngrese el ID del menú a actualizar: ";
+	cin >> idBuscar;
+	cin.ignore();
+
+	for (Menu &m : menus){
+		if (m.id == idBuscar){
+			cout << "\n=== MENÚ ENCONTRADO ===";
+			m.mostrar();
+
+			cout << "\nIngrese el nuevo nombre: ";
+			getline(cin, m.nombre);
+
+			cout << "Ingrese la nueva descripción: ";
+			getline(cin, m.descripcion);
+
+			cout << "Ingrese la nueva categoría: ";
+			getline(cin, m.categoria);
+
+			cout << "Ingrese el nuevo precio: ";
+			cin >> m.precio;
+
+			cout << "\nMENÚ ACTUALIZADO CORRECTAMENTE\n";
+			encontrado = true;
+			break;
+		}
+	}
+
+	if (!encontrado){
+		cout << "\nNo se encontró un menú con ese ID\n";
+	}
+}
+
 int main(){
 	setlocale(LC_ALL, "");
 	
@@ -59,6 +95,7 @@ int main(){
 	cout << "\n*=*=*=*=*=*=*=*=*=*APP REGISTRO MENÚS*=*=*=*=*=*=*=*=*=*"<<endl;
 	cout << "\n1. Mostrar Menús"<<endl;
 	cout << "2. Insertar nuevo Menú"<<endl;;
+	cout << "3. Actualizar Menú" << endl;
 	cout << "0. Salir del sistema"<<endl;;
 	cout << "Digite opcion: ";
 	cin >> op;	
@@ -69,6 +106,9 @@ int main(){
 			break;
 		case 2:
 			agregar(menus);
+			break;
+		case 3:
+			actualizar(menus);
 			break;
 		case 0:
 			cout<<"\nSALIENDO DEL SISTEMA...."<<endl;
@@ -82,4 +122,5 @@ int main(){
 	
 	return 0;
 }
+
 
