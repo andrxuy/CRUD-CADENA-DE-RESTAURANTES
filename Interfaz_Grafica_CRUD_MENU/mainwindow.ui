@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>913</width>
-    <height>733</height>
+    <width>951</width>
+    <height>753</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QLabel" name="titulo">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>10</y>
+      <x>190</x>
+      <y>30</y>
       <width>701</width>
-      <height>121</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -38,10 +38,10 @@
    <widget class="QLabel" name="saludo">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>350</x>
       <y>100</y>
       <width>351</width>
-      <height>131</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
@@ -57,83 +57,279 @@
    <widget class="QPushButton" name="agregar">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>210</y>
-      <width>211</width>
+      <x>10</x>
+      <y>410</y>
+      <width>151</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
-      <pointsize>14</pointsize>
+      <pointsize>15</pointsize>
       <italic>false</italic>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>✨AGREGAR MENÚ</string>
+     <string>✨AGREGAR </string>
     </property>
    </widget>
    <widget class="QPushButton" name="buscar">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>210</y>
-      <width>191</width>
+      <x>180</x>
+      <y>410</y>
+      <width>151</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
-      <pointsize>14</pointsize>
+      <pointsize>15</pointsize>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>🔍 BUSCAR MENÚ</string>
+     <string>🔍 BUSCAR </string>
     </property>
    </widget>
    <widget class="QPushButton" name="actualizar">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>210</y>
-      <width>241</width>
+      <x>350</x>
+      <y>410</y>
+      <width>181</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
-      <pointsize>14</pointsize>
+      <pointsize>15</pointsize>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>🛠️ACTUALIZAR MENÚ</string>
+     <string>🛠️ACTUALIZAR </string>
     </property>
    </widget>
    <widget class="QPushButton" name="eliminar">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>210</y>
-      <width>211</width>
+      <x>550</x>
+      <y>410</y>
+      <width>151</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
-      <pointsize>14</pointsize>
+      <pointsize>15</pointsize>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>🗑️ ELIMINAR MENÚ</string>
+     <string>🗑️ ELIMINAR </string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="eliminar_2">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>410</y>
+      <width>221</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>15</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>👀MOSTRAR MENÚS</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="nombre_menu">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>190</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Nombre Menú:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="categoria">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>260</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Categoría:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="digitar_nombre">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>190</y>
+      <width>231</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="id_menu">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>190</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>ID Menú :</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="digitar_id">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>190</y>
+      <width>91</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="escribir_descripcion">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>260</y>
+      <width>351</width>
+      <height>91</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="descripcion">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>260</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Descripción:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="escribir_precio">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>330</y>
+      <width>111</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="precio">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>330</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Precio:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="categoria_item">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>260</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Desayuno</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Almuerzo</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Merienda</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Postres</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -141,7 +337,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>913</width>
+     <width>951</width>
      <height>22</height>
     </rect>
    </property>
@@ -151,3 +347,5 @@
  <resources/>
  <connections/>
 </ui>
+
+
