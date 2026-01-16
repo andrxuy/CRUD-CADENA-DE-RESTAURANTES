@@ -32,12 +32,28 @@ void recorrer(vector<Menu>& menus){
 	}
 }
 
-void agregar(vector<Menu>& menus){
-	Menu m;
-	cout<<"\nIngrese el ID del menú: ";
-	cin>>m.id;
-	cin.ignore();
-	cout<<"Ingrese el nombre del menú: ";
+void agregar(vector<Menu>& menus) {
+    Menu m;
+    bool idDuplicado;
+    
+    do {
+        idDuplicado = false;
+        cout << "\nIngrese el ID del menú: ";
+        cin >> m.id;
+        
+        for(int i = 0; i < menus.size(); i++) {
+            if(menus[i].id == m.id) {
+            	cout<<"\n";
+                cout << "El ID ingresado ya existe. Intente con otro";
+                cout<<"\n";
+                idDuplicado = true;
+                break;
+            }
+        }
+    } while(idDuplicado);  
+    
+    cin.ignore();
+    cout<<"Ingrese el nombre del menú: ";
 	getline(cin, m.nombre);
 	cout<<"Ingrese la descripcion del menú: ";
 	getline(cin, m.descripcion);
@@ -48,6 +64,29 @@ void agregar(vector<Menu>& menus){
 	cout<<endl;
 	menus.push_back(m);
 }
+
+void buscar(vector<Menu>& menus) {
+    int idBuscar;
+    bool encontrado = false;
+    
+    cout << "\nIngrese el ID del menú a buscar: ";
+    cin >> idBuscar;
+    
+    for (Menu &m : menus) {
+        if (m.id == idBuscar) {
+            cout << "\n=== MENÚ ENCONTRADO ===";
+            m.mostrar();
+            encontrado = true;
+            break;
+        }
+    }
+    
+    if (!encontrado) {
+        cout << "\nNo se encontró un menú con el ID: " << idBuscar << endl;
+    }
+}
+
+
 
 void actualizar(vector<Menu>& menus){
 	int idBuscar;
@@ -96,6 +135,7 @@ int main(){
 	cout << "\n1. Mostrar Menús"<<endl;
 	cout << "2. Insertar nuevo Menú"<<endl;;
 	cout << "3. Actualizar Menú" << endl;
+	cout << "4. Buscar Menú"<<endl;
 	cout << "0. Salir del sistema"<<endl;;
 	cout << "Digite opcion: ";
 	cin >> op;	
@@ -110,6 +150,9 @@ int main(){
 		case 3:
 			actualizar(menus);
 			break;
+		case 4:
+			buscar(menus);
+			break;	
 		case 0:
 			cout<<"\nSALIENDO DEL SISTEMA...."<<endl;
 			break;
@@ -122,5 +165,6 @@ int main(){
 	
 	return 0;
 }
+
 
 
