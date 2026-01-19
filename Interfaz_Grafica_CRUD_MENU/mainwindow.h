@@ -32,7 +32,23 @@ public:
 private slots:
 
 
+    void on_agregar_clicked();
+
+    void on_buscar_clicked();
+
+    void on_mostrar_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    //definimos funciones
+    std::vector<Menu> cargarMenu();
+    Menu  agregarMenu();
+    void  guardarMenu();
+    void  leerMenu();
+    void  buscarMenu();
+//FALTAN EL BORRAR Y ACTUALIZAR MENÚ
+
 };
 #endif // MAINWINDOW_H
+
