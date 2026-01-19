@@ -53,3 +53,43 @@ vector<Menu> MainWindow::cargarMenu() {
     }
     return menus;
 }
+
+//AGREGAR
+Menu MainWindow::agregarMenu() {
+    Menu nuevo;
+
+    nuevo.id = ui->digitar_id->text().toInt();
+
+    for (const auto& m : listaMenus) { //PARA VER SI YA EXISTE UN ID IGUAL
+        if (nuevo.id == m.id) {
+            ui->mostrar->setText("El ID ya existe");
+            return {};
+        }
+    }
+    nuevo.nombre      = ui->digitar_nombre->text().toStdString();
+    nuevo.categoria   = ui->categoria_item->currentText().toStdString();
+    nuevo.descripcion = ui->escribir_descripcion->text().toStdString();
+    nuevo.precio      = ui->escribir_precio->text().toDouble();
+    return nuevo;
+}
+
+//PARA GUARDAR
+void MainWindow::guardarMenu() {
+    ofstream archivo(ruta);
+
+    if (!archivo) {
+        cerr << "Error al abrir el archivo para guardar.\n";
+        return;
+    }
+
+    for (const auto& m : listaMenus) {
+        archivo << m.id << "|"
+                << m.nombre << "|"
+                << m.categoria << "|"
+                << m.descripcion << "|"
+                << m.precio << "\n";
+    }
+
+    ui->mostrar->setText("Menú guardado correctamente");
+}
+
