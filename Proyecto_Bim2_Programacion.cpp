@@ -60,38 +60,28 @@ vector<Menu> cargarMenu() {
     return menus;
 }
 
-//LO DE ABAJO DESDE LA 64 HASTA LA 154, SIGUE SIENDO EN CONSOLA
-void agregar(vector<Menu>& menus) {
-    Menu m;
-    bool idDuplicado;
-    
-    do {
-        idDuplicado = false;
-        cout << "\nIngrese el ID del menú: ";
-        cin >> m.id;
-        
-        for(int i = 0; i < menus.size(); i++) {
-            if(menus[i].id == m.id) {
-            	cout<<"\n";
-                cout << "El ID ingresado ya existe. Intente con otro";
-                cout<<"\n";
-                idDuplicado = true;
-                break;
-            }
+Menu agregarMenu() {
+    Menu nuevoMenu;
+    cout << "Ingrese el ID del menú: ";
+    cin >> nuevoMenu.id;
+
+    for (const auto& menu : listaMenus) {
+        if (nuevoMenu.id == menu.id) {
+            cout << "\nEl menú ya existe (ID duplicado).\n";
+            return {}; 
         }
-    } while(idDuplicado);  
-    
-    cin.ignore();
-    cout<<"Ingrese el nombre del menú: ";
-	getline(cin, m.nombre);
-	cout<<"Ingrese la descripcion del menú: ";
-	getline(cin, m.descripcion);
-	cout<<"Ingrese la categoria del menú: ";
-	getline(cin, m.categoria);
-	cout<<"Ingrese el precio del menú: ";
-	cin>>m.precio;
-	cout<<endl;
-	menus.push_back(m);
+    }
+    cin.ignore(); 
+    cout << "Ingrese el nombre del menú: ";
+    getline(cin, nuevoMenu.nombre);
+    cout << "Ingrese la descripción del menú: ";
+    getline(cin, nuevoMenu.descripcion);
+    cout << "Ingrese la categoría del menú: ";
+    getline(cin, nuevoMenu.categoria);
+    cout << "Ingrese el precio del menú: ";
+    cin >> nuevoMenu.precio;
+	cout<<"\nMenu Registrado Con Éxito.\n";
+    return nuevoMenu;
 }
 
 void buscar(vector<Menu>& menus) {
@@ -109,13 +99,26 @@ void buscar(vector<Menu>& menus) {
             break;
         }
     }
-    
     if (!encontrado) {
         cout << "\nNo se encontró un menú con el ID: " << idBuscar << endl;
     }
 }
 
-
+void guardarMenu(){
+    ofstream archivo(ruta);
+    if (!archivo) {
+        cerr << "\nError al abrir el archivo para guardar.\n";
+        return;
+    }
+    for (const auto& m : listaMenus) {
+        archivo << m.id << "|"
+                << m.nombre << "|"
+                << m.descripcion << "|"
+                << m.categoria << "|"
+                << m.precio << "\n";
+    }
+}
+//LO DE ABAJO DESDE LA 122 HASTA LA 156, SIGUE SIENDO EN CONSOLA
 void actualizar(vector<Menu>& menus){
 	int idBuscar;
 	bool encontrado = false;
@@ -194,5 +197,6 @@ int main() {
     }
     return 0;
 }
+
 
 
