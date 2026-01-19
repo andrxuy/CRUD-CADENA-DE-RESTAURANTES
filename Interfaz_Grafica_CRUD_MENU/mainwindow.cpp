@@ -93,3 +93,29 @@ void MainWindow::guardarMenu() {
     ui->mostrar->setText("Menú guardado correctamente");
 }
 
+//PARA MOSTAR TODOS LOS MENUS
+void MainWindow::leerMenu() {
+    ui->tabla_registros->setRowCount(0);
+    int fila = 0;
+    
+    for (const auto& m : listaMenus) {
+        ui->tabla_registros->insertRow(fila);
+        ui->tabla_registros->setItem(fila, 0, new QTableWidgetItem(QString::number(m.id)));
+        ui->tabla_registros->setItem(fila, 1, new QTableWidgetItem(QString::fromStdString(m.nombre)));
+        ui->tabla_registros->setItem(fila, 2, new QTableWidgetItem(QString::fromStdString(m.categoria)));
+        ui->tabla_registros->setItem(fila, 3, new QTableWidgetItem(QString::fromStdString(m.descripcion)));
+        ui->tabla_registros->setItem(fila, 4,new QTableWidgetItem(QString("$ %1").arg(m.precio, 0, 'f', 2)));
+        fila++;
+    }
+}
+
+//CONECCIÓN  A BOTONES
+void MainWindow::on_agregar_clicked()
+{
+    Menu nuevo = agregarMenu();
+    if (nuevo.id != 0) {
+        listaMenus.push_back(nuevo);
+        guardarMenu();
+        leerMenu();
+    }
+}
