@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>951</width>
-    <height>878</height>
+    <width>958</width>
+    <height>939</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -135,7 +135,7 @@
      <string>🗑️ ELIMINAR </string>
     </property>
    </widget>
-   <widget class="QPushButton" name="eliminar_2">
+   <widget class="QPushButton" name="mostrar">
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -330,6 +330,16 @@
       <string>Postres</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>Cócteles</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bebidas</string>
+     </property>
+    </item>
    </widget>
    <widget class="QTableWidget" name="tabla_registros">
     <property name="geometry">
@@ -337,7 +347,7 @@
       <x>20</x>
       <y>500</y>
       <width>911</width>
-      <height>321</height>
+      <height>391</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderCascadingSectionResizes">
@@ -419,7 +429,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>951</width>
+     <width>958</width>
      <height>22</height>
     </rect>
    </property>
