@@ -84,26 +84,6 @@ Menu agregarMenu() {
     return nuevoMenu;
 }
 
-void buscar(vector<Menu>& menus) {
-    int idBuscar;
-    bool encontrado = false;
-    
-    cout << "\nIngrese el ID del menú a buscar: ";
-    cin >> idBuscar;
-    
-    for (Menu &m : menus) {
-        if (m.id == idBuscar) {
-            cout << "\n=== MENÚ ENCONTRADO ===";
-            m.mostrar();
-            encontrado = true;
-            break;
-        }
-    }
-    if (!encontrado) {
-        cout << "\nNo se encontró un menú con el ID: " << idBuscar << endl;
-    }
-}
-
 void guardarMenu(){
     ofstream archivo(ruta);
     if (!archivo) {
@@ -118,7 +98,65 @@ void guardarMenu(){
                 << m.precio << "\n";
     }
 }
-//LO DE ABAJO DESDE LA 122 HASTA LA 156, SIGUE SIENDO EN CONSOLA
+
+void buscarMenu() {
+    int id;
+    cout << "Ingrese el ID del menú a buscar: ";
+    cin >> id;
+    ifstream archivo(ruta);
+    if (!archivo) {
+        cerr << "\nNo se pudo abrir el archivo menus.txt\n";
+        return;
+    }
+    string linea;
+    while (getline(archivo, linea)) {
+        Menu m;
+        int pos = 0;
+        int campo = 0;
+        string token;
+
+        while ((pos = linea.find('|')) != string::npos) {
+            token = linea.substr(0, pos);
+            if (campo == 0) {
+                m.id = stoi(token);
+            } else if (campo == 1) {
+                m.nombre = token;
+            } else if (campo == 2) {
+                m.descripcion = token;
+            } else if (campo == 3) {
+                m.categoria = token;
+            }
+            linea.erase(0, pos + 1);
+            campo++;
+        }
+        m.precio = stod(linea);
+        if (m.id == id) {
+            cout << "\n=================== MENÚ ENCONTRADO =============== \n";
+            cout << "ID: " << m.id << endl;
+            cout << "Nombre: " << m.nombre << endl;
+            cout << "Descripción: " << m.descripcion << endl;
+            cout << "Categoría: " << m.categoria << endl;
+            cout << "Precio: $" << m.precio<< endl;
+            return;
+        }
+    }
+    cout << "\nMenú no encontrado\n";
+}
+
+void leerMenu() {
+    if (listaMenus.empty()) {
+        cout << "\nNo hay menús registrados\n";
+    } else {
+        cout << "\n*=*=*=*=*=*=*=*=*=* LISTA DE MENÚS REGISTRADOS *=*=*=*=*=*=*=*=*=*\n";
+        for (const auto& m : listaMenus) {
+            cout <<"ID: "<< m.id << "\nNombre: " << m.nombre << "\nDescripción: "
+                 << m.descripcion << "\nCategoria: " << m.categoria
+                 << "\nPrecio: $" << m.precio << endl;
+        }
+    }
+}
+
+//LO DE ABAJO DESDE LA 159 HASTA LA 189, SIGUE SIENDO EN CONSOLA
 void actualizar(vector<Menu>& menus){
 	int idBuscar;
 	bool encontrado = false;
@@ -168,7 +206,7 @@ int main() {
         cout << "1. Registrar nuevo menú\n";
         cout << "2. Buscar un menú\n";
 		cout << "3. Actualizar Menú" << endl;
-        //cout << "5. Mostrar todos los menús\n";
+        cout << "5. Mostrar todos los menús\n";
         cout << "0. Salir\n";
         cout << "Seleccione una opción: ";
         cin >> opcion;
@@ -182,11 +220,13 @@ int main() {
                 }
                 break;
 			case 2:
-				buscar(menus);
+				buscarMenu();
 				break;
 			case 3:
 				actualizar(menus);
 				break;
+			case 5:
+				leerMenu();
             case 0:
                 cout << "\nSALIENDO DEL SISTEMA...\n";
                 return 0;
@@ -197,6 +237,7 @@ int main() {
     }
     return 0;
 }
+
 
 
 
