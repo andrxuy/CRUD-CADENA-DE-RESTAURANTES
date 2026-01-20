@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <QMessageBox>   //LO PUSE PPARA MENSAJES DE ERROR O ADVERTENCIAS
 using namespace std;
 
 vector<Menu> listaMenus;
@@ -97,7 +98,6 @@ void MainWindow::guardarMenu() {
 void MainWindow::leerMenu() {
     ui->tabla_registros->setRowCount(0);
     int fila = 0;
-    
     for (const auto& m : listaMenus) {
         ui->tabla_registros->insertRow(fila);
         ui->tabla_registros->setItem(fila, 0, new QTableWidgetItem(QString::number(m.id)));
@@ -109,7 +109,29 @@ void MainWindow::leerMenu() {
     }
 }
 
-//CONECCIÓN  A BOTONES
+//PARA BUSCAR POR ID
+void MainWindow::buscarMenu() {
+    int idBuscar = ui->digitar_id->text().toInt();
+    ui->tabla_registros->setRowCount(0);
+    bool encontrado = false;
+    for (const auto& m : listaMenus) {
+        if (m.id == idBuscar) {
+            int fila = ui->tabla_registros->rowCount();
+            ui->tabla_registros->insertRow(fila);
+            ui->tabla_registros->setItem(fila, 0, new QTableWidgetItem(QString::number(m.id)));
+            ui->tabla_registros->setItem(fila, 1, new QTableWidgetItem(QString::fromStdString(m.nombre)));
+            ui->tabla_registros->setItem(fila, 2, new QTableWidgetItem(QString::fromStdString(m.categoria)));
+            ui->tabla_registros->setItem(fila, 3, new QTableWidgetItem(QString::fromStdString(m.descripcion)));
+            ui->tabla_registros->setItem(fila, 4, new QTableWidgetItem(QString::number(m.precio)));
+            ui->mostrar->setText("Menú encontrado");
+            encontrado = true;
+            break;
+        }
+    }
+    if (!encontrado) ui->mostrar->setText("ID no encontrado");
+}
+
+//CONEXIÓN DE BOTONES
 void MainWindow::on_agregar_clicked()
 {
     Menu nuevo = agregarMenu();
@@ -119,3 +141,14 @@ void MainWindow::on_agregar_clicked()
         leerMenu();
     }
 }
+
+void MainWindow::on_buscar_clicked()
+{
+    buscarMenu();
+}
+
+void MainWindow::on_mostrar_clicked()
+{
+    leerMenu();
+}
+
