@@ -157,40 +157,65 @@ void leerMenu() {
 }
 
 //LO DE ABAJO DESDE LA 159 HASTA LA 189, SIGUE SIENDO EN CONSOLA
-void actualizar(vector<Menu>& menus){
-	int idBuscar;
-	bool encontrado = false;
+void actualizar() {
+    vector<Menu> menus = cargarMenu(); // cargar desde archivo
+    int idBuscar;
+    bool encontrado = false;
 
-	cout << "\nIngrese el ID del menú a actualizar: ";
-	cin >> idBuscar;
-	cin.ignore();
+    cout << "\nIngrese el ID del menú a actualizar: ";
+    cin >> idBuscar;
+    cin.ignore();
 
-	for (Menu &m : menus){
-		if (m.id == idBuscar){
-			cout << "\n=== MENÚ ENCONTRADO ===";
-			m.mostrar();
+    for (Menu &m : menus) {
+        if (m.id == idBuscar) {
+            cout << "\n=== MENÚ ENCONTRADO ===\n";
+            cout << "ID: " << m.id << endl;
+            cout << "Nombre actual: " << m.nombre << endl;
+            cout << "Descripción actual: " << m.descripcion << endl;
+            cout << "Categoría actual: " << m.categoria << endl;
+            cout << "Precio actual: $" << m.precio << endl;
 
-			cout << "\nIngrese el nuevo nombre: ";
-			getline(cin, m.nombre);
+            cout << "\nIngrese el nuevo nombre: ";
+            getline(cin, m.nombre);
 
-			cout << "Ingrese la nueva descripción: ";
-			getline(cin, m.descripcion);
+            cout << "Ingrese la nueva descripción: ";
+            getline(cin, m.descripcion);
 
-			cout << "Ingrese la nueva categoría: ";
-			getline(cin, m.categoria);
+            cout << "Ingrese la nueva categoría: ";
+            getline(cin, m.categoria);
 
-			cout << "Ingrese el nuevo precio: ";
-			cin >> m.precio;
+            cout << "Ingrese el nuevo precio: ";
+            cin >> m.precio;
 
-			cout << "\nMENÚ ACTUALIZADO CORRECTAMENTE\n";
-			encontrado = true;
-			break;
-		}
-	}
+            encontrado = true;
+            break;
+        }
+    }
 
-	if (!encontrado){
-		cout << "\nNo se encontró un menú con ese ID\n";
-	}
+    if (!encontrado) {
+        cout << "\nNo se encontró un menú con ese ID\n";
+        return;
+    }
+
+    // Reescribir archivo con datos actualizados
+    ofstream archivo(ruta);
+    if (!archivo) {
+        cerr << "\nError al abrir el archivo para actualizar.\n";
+        return;
+    }
+
+    for (const auto& m : menus) {
+        archivo << m.id << "|"
+                << m.nombre << "|"
+                << m.descripcion << "|"
+                << m.categoria << "|"
+                << m.precio << "\n";
+    }
+
+    cout << "\nMENÚ ACTUALIZADO CORRECTAMENTE\n";
+
+    // sincroniza la lista en memoria
+    listaMenus = menus;
 }
 
 //SOLO LA OPCION (case: 1) está con archivos, tomar en cuenta
@@ -223,7 +248,7 @@ int main() {
 				buscarMenu();
 				break;
 			case 3:
-				actualizar(menus);
+				actualizar();
 				break;
 			case 5:
 				leerMenu();
@@ -237,6 +262,7 @@ int main() {
     }
     return 0;
 }
+
 
 
 
