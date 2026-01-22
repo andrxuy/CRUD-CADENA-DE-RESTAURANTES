@@ -18,20 +18,17 @@ MainWindow::MainWindow(QWidget *parent)
     listaMenus = cargarMenu();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
 }
 
 vector<Menu> MainWindow::cargarMenu() {     //CARGAR
     vector<Menu> menus;
     ifstream archivo(ruta);
-
     if (!archivo) {
         QMessageBox::information(this, "Información","Archivo no encontrado. Se iniciará una nueva lista.");
         return menus;
     }
-
     string linea;
     while (getline(archivo, linea)) {
         Menu m;
@@ -45,7 +42,6 @@ vector<Menu> MainWindow::cargarMenu() {     //CARGAR
             else if (campo == 1) m.nombre = token;
             else if (campo == 2) m.categoria = token;
             else if (campo == 3) m.descripcion = token;
-
             linea.erase(0, pos + 1);
             campo++;
         }
@@ -53,6 +49,18 @@ vector<Menu> MainWindow::cargarMenu() {     //CARGAR
         menus.push_back(m);
     }
     return menus;
+}
+
+bool esNumeroEntero(const QString& texto) {     //PARA VALIDAR SI SON NUMEROS INT(ID)
+    bool ok;
+    texto.toInt(&ok);
+    return ok && texto.toInt() > 0;
+}
+
+bool esNumeroDecimalPositivo(const QString& texto) {        //PARA VALIDAR SI SON NUMEROS DOUBLE (PRECIO)
+    bool ok;
+    double valor = texto.toDouble(&ok);
+    return ok && valor > 0;
 }
 
 //AGREGAR
@@ -151,5 +159,6 @@ void MainWindow::on_mostrar_clicked()
 {
     leerMenu();
 }
+
 
 
