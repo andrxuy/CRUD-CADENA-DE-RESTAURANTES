@@ -128,9 +128,12 @@ void MainWindow::guardarMenu() {        //PARA GUARDAR
     QMessageBox::information(this, "Éxito","Menú guardado correctamente.");
 }
 
-//PARA MOSTAR TODOS LOS MENUS
-void MainWindow::leerMenu() {
+void MainWindow::leerMenu() {       //PARA MOSTRAR TODOS LOS MENUS
     ui->tabla_registros->setRowCount(0);
+    if (listaMenus.empty()) {
+        QMessageBox::information(this, "Información","No hay menús registrados.");
+        return;
+    }
     int fila = 0;
     for (const auto& m : listaMenus) {
         ui->tabla_registros->insertRow(fila);
@@ -138,7 +141,7 @@ void MainWindow::leerMenu() {
         ui->tabla_registros->setItem(fila, 1, new QTableWidgetItem(QString::fromStdString(m.nombre)));
         ui->tabla_registros->setItem(fila, 2, new QTableWidgetItem(QString::fromStdString(m.categoria)));
         ui->tabla_registros->setItem(fila, 3, new QTableWidgetItem(QString::fromStdString(m.descripcion)));
-        ui->tabla_registros->setItem(fila, 4,new QTableWidgetItem(QString("$ %1").arg(m.precio, 0, 'f', 2)));
+        ui->tabla_registros->setItem(fila, 4, new QTableWidgetItem(QString("$ %1").arg(m.precio, 0, 'f', 2)));
         fila++;
     }
 }
@@ -185,6 +188,7 @@ void MainWindow::on_mostrar_clicked()
 {
     leerMenu();
 }
+
 
 
 
