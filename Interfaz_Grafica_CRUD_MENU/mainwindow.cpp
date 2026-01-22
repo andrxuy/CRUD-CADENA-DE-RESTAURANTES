@@ -63,22 +63,55 @@ bool esNumeroDecimalPositivo(const QString& texto) {        //PARA VALIDAR SI SO
     return ok && valor > 0;
 }
 
-//AGREGAR
-Menu MainWindow::agregarMenu() {
+Menu MainWindow::agregarMenu() {        //AGREGAR
     Menu nuevo;
+    QString idTexto = ui->digitar_id->text();
+    QString precioTexto = ui->escribir_precio->text();
 
-    nuevo.id = ui->digitar_id->text().toInt();
+    if (idTexto.isEmpty()) {
+        QMessageBox::warning(this, "Advertencia","El campo ID no puede estar vacío.");
+        return {};
+    }
+    if (!esNumeroEntero(idTexto)) {
+        QMessageBox::warning(this, "Advertencia","El ID debe ser un número entero positivo.");
+        return {};
+    }
+    nuevo.id = idTexto.toInt();
 
-    for (const auto& m : listaMenus) { //PARA VER SI YA EXISTE UN ID IGUAL
+    for (const auto& m : listaMenus) {
         if (nuevo.id == m.id) {
-            ui->mostrar->setText("El ID ya existe");
+            QMessageBox::critical(this, "Error", "El ID ya existe. Por favor, use un ID diferente.");
             return {};
         }
     }
-    nuevo.nombre      = ui->digitar_nombre->text().toStdString();
-    nuevo.categoria   = ui->categoria_item->currentText().toStdString();
+    if (ui->digitar_nombre->text().isEmpty()) {
+        QMessageBox::warning(this, "Advertencia","El campo Nombre no puede estar vacío.");
+        return {};
+    }
+    nuevo.nombre = ui->digitar_nombre->text().toStdString();
+
+    if (ui->categoria_item->currentText().isEmpty()) {
+        QMessageBox::warning(this, "Advertencia", "Debe seleccionar una categoría.");
+        return {};
+    }
+    nuevo.categoria = ui->categoria_item->currentText().toStdString();
+
+    if (ui->escribir_descripcion->text().isEmpty()) {
+        QMessageBox::warning(this, "Advertencia", "El campo Descripción no puede estar vacío.");
+        return {};
+    }
     nuevo.descripcion = ui->escribir_descripcion->text().toStdString();
-    nuevo.precio      = ui->escribir_precio->text().toDouble();
+    
+    if (precioTexto.isEmpty()) {
+        QMessageBox::warning(this, "Advertencia", "El campo Precio no puede estar vacío.");
+        return {};
+    }
+
+    if (!esNumeroDecimalPositivo(precioTexto)) {
+        QMessageBox::warning(this, "Advertencia", "El precio no puede ser un valor negativo ni cero. $0");
+        return {};
+    }
+    nuevo.precio = precioTexto.toDouble();
     return nuevo;
 }
 
@@ -159,6 +192,7 @@ void MainWindow::on_mostrar_clicked()
 {
     leerMenu();
 }
+
 
 
 
