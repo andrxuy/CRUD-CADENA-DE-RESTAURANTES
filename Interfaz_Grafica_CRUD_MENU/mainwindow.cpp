@@ -4,7 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <QMessageBox>   //LO PUSE PPARA MENSAJES DE ERROR O ADVERTENCIAS
+#include <QMessageBox>   //LO PUSE PPARA MENSAJES
 using namespace std;
 
 vector<Menu> listaMenus;
@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    listaMenus= cargarMenu();
+    listaMenus = cargarMenu();
 }
 
 MainWindow::~MainWindow()
@@ -23,13 +23,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//CARGAR
-vector<Menu> MainWindow::cargarMenu() {
+vector<Menu> MainWindow::cargarMenu() {     //CARGAR
     vector<Menu> menus;
     ifstream archivo(ruta);
 
     if (!archivo) {
-        cerr << "Archivo no encontrado. Se iniciará una nueva lista.\n";
+        QMessageBox::information(this, "Información","Archivo no encontrado. Se iniciará una nueva lista.");
         return menus;
     }
 
@@ -46,6 +45,7 @@ vector<Menu> MainWindow::cargarMenu() {
             else if (campo == 1) m.nombre = token;
             else if (campo == 2) m.categoria = token;
             else if (campo == 3) m.descripcion = token;
+
             linea.erase(0, pos + 1);
             campo++;
         }
@@ -151,4 +151,5 @@ void MainWindow::on_mostrar_clicked()
 {
     leerMenu();
 }
+
 
