@@ -35,7 +35,6 @@ vector<Menu> MainWindow::cargarMenu() {     //CARGAR
         int pos = 0;
         int campo = 0;
         string token;
-
         while ((pos = linea.find('|')) != string::npos) {
             token = linea.substr(0, pos);
             if (campo == 0) m.id = stoi(token);
@@ -67,7 +66,6 @@ Menu MainWindow::agregarMenu() {        //AGREGAR
     Menu nuevo;
     QString idTexto = ui->digitar_id->text();
     QString precioTexto = ui->escribir_precio->text();
-
     if (idTexto.isEmpty()) {
         QMessageBox::warning(this, "Advertencia","El campo ID no puede estar vacío.");
         return {};
@@ -77,7 +75,6 @@ Menu MainWindow::agregarMenu() {        //AGREGAR
         return {};
     }
     nuevo.id = idTexto.toInt();
-
     for (const auto& m : listaMenus) {
         if (nuevo.id == m.id) {
             QMessageBox::critical(this, "Error", "El ID ya existe. Por favor, use un ID diferente.");
@@ -106,7 +103,6 @@ Menu MainWindow::agregarMenu() {        //AGREGAR
         QMessageBox::warning(this, "Advertencia", "El campo Precio no puede estar vacío.");
         return {};
     }
-
     if (!esNumeroDecimalPositivo(precioTexto)) {
         QMessageBox::warning(this, "Advertencia", "El precio no puede ser un valor negativo ni cero. $0");
         return {};
@@ -146,9 +142,17 @@ void MainWindow::leerMenu() {       //PARA MOSTRAR TODOS LOS MENUS
     }
 }
 
-//PARA BUSCAR POR ID
-void MainWindow::buscarMenu() {
-    int idBuscar = ui->digitar_id->text().toInt();
+void MainWindow::buscarMenu(){ //PARA BUSCAR POR ID
+    QString idTexto = ui->digitar_id->text();
+    if (idTexto.isEmpty()) {
+        QMessageBox::warning(this, "Advertencia","Debe ingresar un ID para buscar.");
+        return;
+    }
+    if (!esNumeroEntero(idTexto)) {
+        QMessageBox::warning(this, "Advertencia","El ID debe ser un número entero positivo.");
+        return;
+    }
+    int idBuscar = idTexto.toInt();
     ui->tabla_registros->setRowCount(0);
     bool encontrado = false;
     for (const auto& m : listaMenus) {
@@ -160,12 +164,14 @@ void MainWindow::buscarMenu() {
             ui->tabla_registros->setItem(fila, 2, new QTableWidgetItem(QString::fromStdString(m.categoria)));
             ui->tabla_registros->setItem(fila, 3, new QTableWidgetItem(QString::fromStdString(m.descripcion)));
             ui->tabla_registros->setItem(fila, 4, new QTableWidgetItem(QString::number(m.precio)));
-            ui->mostrar->setText("Menú encontrado");
+            QMessageBox::information(this, "Éxito", "Menú encontrado.");
             encontrado = true;
             break;
         }
     }
-    if (!encontrado) ui->mostrar->setText("ID no encontrado");
+    if (!encontrado) {
+        QMessageBox::warning(this, "No encontrado","ID no encontrado en los registros.");
+    }
 }
 
 //CONEXIÓN DE BOTONES
@@ -188,6 +194,7 @@ void MainWindow::on_mostrar_clicked()
 {
     leerMenu();
 }
+
 
 
 
