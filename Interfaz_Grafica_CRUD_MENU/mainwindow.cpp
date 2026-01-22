@@ -115,24 +115,17 @@ Menu MainWindow::agregarMenu() {        //AGREGAR
     return nuevo;
 }
 
-//PARA GUARDAR
-void MainWindow::guardarMenu() {
+void MainWindow::guardarMenu() {        //PARA GUARDAR
     ofstream archivo(ruta);
-
     if (!archivo) {
-        cerr << "Error al abrir el archivo para guardar.\n";
+        QMessageBox::critical(this, "Error","Error al abrir el archivo para guardar.");
         return;
     }
-
     for (const auto& m : listaMenus) {
-        archivo << m.id << "|"
-                << m.nombre << "|"
-                << m.categoria << "|"
-                << m.descripcion << "|"
-                << m.precio << "\n";
+        archivo << m.id << "|"<< m.nombre << "|"<< m.categoria << "|"
+                << m.descripcion << "|"<< m.precio << "\n";
     }
-
-    ui->mostrar->setText("Menú guardado correctamente");
+    QMessageBox::information(this, "Éxito","Menú guardado correctamente.");
 }
 
 //PARA MOSTAR TODOS LOS MENUS
@@ -192,6 +185,7 @@ void MainWindow::on_mostrar_clicked()
 {
     leerMenu();
 }
+
 
 
 
