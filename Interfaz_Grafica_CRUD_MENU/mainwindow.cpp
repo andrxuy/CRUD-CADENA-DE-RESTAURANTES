@@ -199,8 +199,84 @@ void MainWindow::on_mostrar_clicked(){
 
 
 
+void MainWindow::on_actualizar_clicked()
+{
+    vector<Menu> menus = cargarMenu(); // cargar desde archivo
+    QString idTexto = ui->digitar_id->text();
+    bool encontrado = false;
 
+    if (idTexto.isEmpty()) {
+        QMessageBox::warning(this, "Advertencia", "Ingrese el ID del menú a actualizar.");
+        return;
+    }
 
+    if (!esNumeroEntero(idTexto)) {
+        QMessageBox::warning(this, "Advertencia", "El ID debe ser un número entero positivo.");
+        return;
+    }
 
+    int idBuscar = idTexto.toInt();
+
+    for (Menu &m : menus) {
+        if (m.id == idBuscar) {
+
+            // Validaciones similares al agregar
+            if (ui->digitar_nombre->text().isEmpty() ||
+                ui->escribir_descripcion->text().isEmpty() ||
+                ui->categoria_item->currentText().isEmpty() ||
+                ui->escribir_precio->text().isEmpty()) {
+
+                QMessageBox::warning(this, "Advertencia",
+                                     "Todos los campos deben estar llenos.");
+                return;
+            }
+
+            if (!esNumeroDecimalPositivo(ui->escribir_precio->text())) {
+                QMessageBox::warning(this, "Advertencia",
+                                     "El precio debe ser un número positivo.");
+                return;
+            }
+
+            // === ACTUALIZACIÓN (igual a tu ejemplo) ===
+            m.nombre = ui->digitar_nombre->text().toStdString();
+            m.descripcion = ui->escribir_descripcion->text().toStdString();
+            m.categoria = ui->categoria_item->currentText().toStdString();
+            m.precio = ui->escribir_precio->text().toDouble();
+
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        QMessageBox::warning(this, "No encontrado",
+                             "No se encontró un menú con ese ID.");
+        return;
+    }
+
+    // Reescribir archivo con datos actualizados
+    ofstream archivo(ruta);
+    if (!archivo) {
+        QMessageBox::critical(this, "Error",
+                              "Error al abrir el archivo para actualizar.");
+        return;
+    }
+
+    for (const auto& m : menus) {
+        archivo << m.id << "|"
+                << m.nombre << "|"
+                << m.categoria << "|"
+                << m.descripcion << "|"
+                << m.precio << "\n";
+    }
+
+    QMessageBox::information(this, "Éxito",
+                             "MENÚ ACTUALIZADO CORRECTAMENTE");
+
+    // sincroniza la lista en memoria
+    listaMenus = menus;
+
+    leerMenu();
+}
 
 
