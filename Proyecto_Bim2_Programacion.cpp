@@ -268,11 +268,12 @@ int main() {
 
     while (true) {
         cout << "\n*=*=*=*=*=*=*=*=*=* APP REGISTRO MENÚS *=*=*=*=*=*=*=*=*=*\n";
-        cout << "1. Registrar nuevo menú\n";
-        cout << "2. Buscar un menú\n";
-		cout << "3. Actualizar Menú" << endl;
-        cout << "5. Mostrar todos los menús\n";
-        cout << "0. Salir\n";
+        cout << "1. Registrar nuevo menú.\n";
+        cout << "2. Buscar un menú.\n";
+		cout << "3. Actualizar Menú." << endl;
+		cout << "4. Eliminar Menú."<<endl
+        cout << "5. Mostrar todos los menús.\n";
+        cout << "0. Salir.\n";
         cout << "Seleccione una opción: ";
         cin >> opcion;
 
@@ -291,6 +292,9 @@ int main() {
 			case 3:
 				actualizar();
 				break;
+			case 4:
+			    eliminarMenu();
+			    break;
 			case 5:
 				leerMenu();
             case 0:
