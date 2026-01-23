@@ -217,6 +217,46 @@ void actualizar() {
     // sincroniza la lista en memoria
     listaMenus = menus;
 }
+void eliminarMenu() {
+    vector<Menu> menus = cargarMenu();
+    int idEliminar;
+    bool encontrado = false;
+
+    cout << "\nIngrese el ID del menú a eliminar: ";
+    cin >> idEliminar;
+
+    auto it = remove_if(menus.begin(), menus.end(),
+                        [idEliminar](const Menu& m) {
+                            return m.id == idEliminar;
+                        });
+
+    if (it != menus.end()) {
+        menus.erase(it, menus.end());
+        encontrado = true;
+    }
+
+    if (!encontrado) {
+        cout << "\nNo se encontró un menú con ese ID\n";
+        return;
+    }
+
+    ofstream archivo(ruta);
+    if (!archivo) {
+        cerr << "\nError al abrir el archivo para eliminar\n";
+        return;
+    }
+
+    for (const auto& m : menus) {
+        archivo << m.id << "|"
+                << m.nombre << "|"
+                << m.descripcion << "|"
+                << m.categoria << "|"
+                << m.precio << "\n";
+    }
+
+    listaMenus = menus;
+    cout << "\nMENÚ ELIMINADO CORRECTAMENTE\n";
+}
 
 //SOLO LA OPCION (case: 1) está con archivos, tomar en cuenta
 int main() {
@@ -243,6 +283,7 @@ int main() {
                     listaMenus.push_back(nuevo);
                     guardarMenu();
                 }
+            }
                 break;
 			case 2:
 				buscarMenu();
@@ -262,7 +303,6 @@ int main() {
     }
     return 0;
 }
-
 
 
 
