@@ -40,6 +40,8 @@ private slots:
 
     void on_actualizar_clicked();
 
+    void on_eliminar_clicked();
+
 private:
     Ui::MainWindow *ui;
 
