@@ -174,34 +174,8 @@ void MainWindow::buscarMenu(){ //PARA BUSCAR POR ID
     }
 }
 
-//CONEXIÓN DE BOTONES
-void MainWindow::on_agregar_clicked(){
-    Menu nuevo = agregarMenu();
-    if (nuevo.id != 0) {
-        listaMenus.push_back(nuevo);
-        guardarMenu();
-        leerMenu();
-        ui->digitar_id->clear();
-        ui->digitar_nombre->clear();
-        ui->escribir_descripcion->clear();
-        ui->escribir_precio->clear();
-        ui->categoria_item->setCurrentIndex(0);
-    }
-}
-
-void MainWindow::on_buscar_clicked(){
-    buscarMenu();
-}
-
-void MainWindow::on_mostrar_clicked(){
-    leerMenu();
-}
-
-
-
-void MainWindow::on_actualizar_clicked()
-{
-    vector<Menu> menus = cargarMenu(); // cargar desde archivo
+void MainWindow::actualizarMenu() {       //PARA MOSTRAR TODOS LOS MENUS
+   vector<Menu> menus = cargarMenu(); // cargar desde archivo
     QString idTexto = ui->digitar_id->text();
     bool encontrado = false;
 
@@ -278,6 +252,36 @@ void MainWindow::on_actualizar_clicked()
 
     leerMenu();
 }
+
+//CONEXIÓN DE BOTONES
+void MainWindow::on_agregar_clicked(){
+    Menu nuevo = agregarMenu();
+    if (nuevo.id != 0) {
+        listaMenus.push_back(nuevo);
+        guardarMenu();
+        leerMenu();
+        ui->digitar_id->clear();
+        ui->digitar_nombre->clear();
+        ui->escribir_descripcion->clear();
+        ui->escribir_precio->clear();
+        ui->categoria_item->setCurrentIndex(0);
+    }
+}
+
+void MainWindow::on_buscar_clicked(){
+    buscarMenu();
+}
+
+void MainWindow::on_mostrar_clicked(){
+    leerMenu();
+}
+
+
+
+void MainWindow::on_actualizar_clicked(){
+    actualizarMenu();
+}
+
 
 
 
