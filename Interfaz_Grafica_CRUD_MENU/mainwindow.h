@@ -49,8 +49,10 @@ private:
     void  guardarMenu();
     void  leerMenu();
     void  buscarMenu();
+    void actualizarMenu()
 //FALTAN EL BORRAR Y ACTUALIZAR MENÚ
 
 };
 #endif // MAINWINDOW_H
+
 
