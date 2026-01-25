@@ -253,6 +253,46 @@ void MainWindow::actualizarMenu() {       //PARA MOSTRAR TODOS LOS MENUS
     leerMenu();
 }
 
+void MainWindow::eliminarMenu() {
+    QString idTexto = ui->digitar_id->text();
+
+    if (idTexto.isEmpty()) {
+        QMessageBox::warning(this, "Advertencia",
+                             "Ingrese el ID del menú a eliminar.");
+        return;
+    }
+
+    if (!esNumeroEntero(idTexto)) {
+        QMessageBox::warning(this, "Advertencia",
+                             "El ID debe ser un número entero positivo.");
+        return;
+    }
+
+    int id = idTexto.toInt();
+    bool encontrado = false;
+
+    for (auto it = listaMenus.begin(); it != listaMenus.end(); ++it) {
+        if (it->id == id) {
+            listaMenus.erase(it);
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        QMessageBox::warning(this, "Error",
+                             "No se encontró un menú con ese ID.");
+        return;
+    }
+    QMessageBox::information(this, "Éxito",
+                             "Menú eliminado correctamente.");
+
+    guardarMenu();
+
+    leerMenu();
+    ui->digitar_id->clear();
+}
+
 //CONEXIÓN DE BOTONES
 void MainWindow::on_agregar_clicked(){
     Menu nuevo = agregarMenu();
@@ -285,53 +325,7 @@ void MainWindow::on_actualizar_clicked(){
 
 
 
-void MainWindow::on_eliminar_clicked()
-{
-    QString idTexto = ui->digitar_id->text();
-
-    // Validar campo vacío
-    if (idTexto.isEmpty()) {
-        QMessageBox::warning(this, "Advertencia",
-                             "Ingrese el ID del menú a eliminar.");
-        return;
-    }
-
-    // Validar número
-    if (!esNumeroEntero(idTexto)) {
-        QMessageBox::warning(this, "Advertencia",
-                             "El ID debe ser un número entero positivo.");
-        return;
-    }
-
-    int id = idTexto.toInt();
-
-    bool encontrado = false;
-
-    // Buscar y eliminar en listaMenus
-    for (auto it = listaMenus.begin(); it != listaMenus.end(); ++it) {
-        if (it->id == id) {
-            listaMenus.erase(it);
-            encontrado = true;
-            break;
-        }
-    }
-
-    if (!encontrado) {
-        QMessageBox::warning(this, "Error",
-                             "No se encontró un menú con ese ID.");
-        return;
-    }
-
-    // Guardar cambios en archivo
-    guardarMenu();
-
-    QMessageBox::information(this, "Éxito",
-                             "Menú eliminado correctamente.");
-
-    // Actualizar tabla
-    leerMenu();
-
-    // Limpiar campo
-    ui->digitar_id->clear();
+void MainWindow::on_eliminar_clicked(){
+    eliminarMenu();
 }
 
