@@ -163,7 +163,7 @@ void MainWindow::buscarMenu(){ //PARA BUSCAR POR ID
             ui->tabla_registros->setItem(fila, 1, new QTableWidgetItem(QString::fromStdString(m.nombre)));
             ui->tabla_registros->setItem(fila, 2, new QTableWidgetItem(QString::fromStdString(m.categoria)));
             ui->tabla_registros->setItem(fila, 3, new QTableWidgetItem(QString::fromStdString(m.descripcion)));
-            ui->tabla_registros->setItem(fila, 4, new QTableWidgetItem(QString::number(m.precio)));
+            ui->tabla_registros->setItem(fila, 4, new QTableWidgetItem(QString("$ %1").arg(m.precio, 0, 'f', 2)));
             QMessageBox::information(this, "Éxito", "Menú encontrado.");
             encontrado = true;
             break;
@@ -174,7 +174,7 @@ void MainWindow::buscarMenu(){ //PARA BUSCAR POR ID
     }
 }
 
-void MainWindow::actualizarMenu() {       //PARA MOSTRAR TODOS LOS MENUS
+void MainWindow::actualizarMenu() {       //PARA ACTUALIZAR LOS MENUS
    vector<Menu> menus = cargarMenu(); // cargar desde archivo
     QString idTexto = ui->digitar_id->text();
     bool encontrado = false;
@@ -310,22 +310,32 @@ void MainWindow::on_agregar_clicked(){
 
 void MainWindow::on_buscar_clicked(){
     buscarMenu();
+    ui->digitar_id->clear();
+    ui->digitar_nombre->clear();
+    ui->escribir_descripcion->clear();
+    ui->escribir_precio->clear();
+    ui->categoria_item->setCurrentIndex(0);
 }
 
 void MainWindow::on_mostrar_clicked(){
     leerMenu();
 }
 
-
-
 void MainWindow::on_actualizar_clicked(){
     actualizarMenu();
+    ui->digitar_id->clear();
+    ui->digitar_nombre->clear();
+    ui->escribir_descripcion->clear();
+    ui->escribir_precio->clear();
+    ui->categoria_item->setCurrentIndex(0);
 }
-
-
-
 
 void MainWindow::on_eliminar_clicked(){
     eliminarMenu();
+    ui->digitar_id->clear();
+    ui->digitar_nombre->clear();
+    ui->escribir_descripcion->clear();
+    ui->escribir_precio->clear();
+    ui->categoria_item->setCurrentIndex(0);
 }
 
