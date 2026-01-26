@@ -297,6 +297,7 @@ int main() {
 			    break;
 			case 5:
 				leerMenu();
+				break;
             case 0:
                 cout << "\nSALIENDO DEL SISTEMA...\n";
                 return 0;
@@ -307,6 +308,7 @@ int main() {
     }
     return 0;
 }
+
 
 
 
