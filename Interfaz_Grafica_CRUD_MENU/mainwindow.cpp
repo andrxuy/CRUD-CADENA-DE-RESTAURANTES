@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tabla_registros->setEditTriggers(QAbstractItemView::NoEditTriggers); //PUSEE ESTO PARA QUE NO SE PUEDAN EDITAR LOS VALORES DE LA TABLA DESDE LA MISMA, SOLO CON LOS BOTONES
     listaMenus = cargarMenu();
 }
 
